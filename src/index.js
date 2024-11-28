@@ -2,34 +2,33 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import axios from 'axios'; // axios 추가
-import reportWebVitals from './reportWebVitals';  // 이 줄을 추가합니다.
+import reportWebVitals from './reportWebVitals';  
 
 
 // App 컴포넌트 정의
 function App() {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true); // 데이터 로딩 상태 관리
-  const [error, setError] = useState(null); // 오류 상태 관리
-
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
   useEffect(() => {
     // API 호출
-    axios.get('http://localhost:8080/user')  // 백엔드 서버 주소
+    axios.get('http://test-loadbalancer4-1722022310.ap-northeast-2.elb.amazonaws.com:8080/user')  // 백엔드 서버 주소
       .then(response => {
-        setUsers(response.data);  // 데이터 설정
-        setLoading(false);         // 로딩 완료
+        setUsers(response.data);  
+        setLoading(false);         
       })
       .catch(error => {
-        setError(error);           // 오류 처리
-        setLoading(false);         // 로딩 완료
+        setError(error);          
+        setLoading(false);         
       });
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;  // 로딩 중일 때 표시
+    return <div>Loading...</div>;  
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;  // 오류 발생 시 표시
+    return <div>Error: {error.message}</div>;  
   }
 
   return (
